@@ -1,0 +1,88 @@
+[
+  {
+    "selected" : false,
+    "frame" : "{{0, 0}, {240, 240}}",
+    "class" : "View",
+    "nodes" : [
+      {
+        "selected" : false,
+        "frame" : "{{21, 19}, {150, 32}}",
+        "class" : "Label",
+        "nodes" : [
+
+        ],
+        "attributes" : {
+          "font_name" : "<System>",
+          "frame" : "{{45, 104}, {150, 32}}",
+          "uuid" : "69F99911-3F3A-444F-AE85-FE9E9AFB2947",
+          "text" : "Name",
+          "alignment" : "left",
+          "class" : "Label",
+          "name" : "label1",
+          "font_size" : 18
+        }
+      },
+      {
+        "selected" : true,
+        "frame" : "{{21, 59}, {200, 32}}",
+        "class" : "TextField",
+        "nodes" : [
+
+        ],
+        "attributes" : {
+          "font_name" : "<System>",
+          "frame" : "{{20, 104}, {200, 32}}",
+          "spellchecking_type" : "default",
+          "class" : "TextField",
+          "uuid" : "D5A3A9C0-16D1-4D27-B9C3-32A9A2DB05B8",
+          "alignment" : "left",
+          "autocorrection_type" : "default",
+          "name" : "name_textfield",
+          "font_size" : 17
+        }
+      },
+      {
+        "selected" : false,
+        "frame" : "{{21, 113}, {80, 32}}",
+        "class" : "Button",
+        "nodes" : [
+
+        ],
+        "attributes" : {
+          "action" : "self.cancel_action",
+          "frame" : "{{80, 104}, {80, 32}}",
+          "title" : "Cancel",
+          "uuid" : "EDBFEC32-1415-4B8C-8E82-581FE176F70E",
+          "class" : "Button",
+          "name" : "cancel_button",
+          "font_size" : 15
+        }
+      },
+      {
+        "selected" : false,
+        "frame" : "{{141, 113}, {80, 32}}",
+        "class" : "Button",
+        "nodes" : [
+
+        ],
+        "attributes" : {
+          "action" : "self.people_save_action",
+          "frame" : "{{80, 104}, {80, 32}}",
+          "title" : "Save",
+          "uuid" : "D6B4F904-58A8-43AB-92F7-AF949B247AE0",
+          "class" : "Button",
+          "name" : "save_button",
+          "font_size" : 15
+        }
+      }
+    ],
+    "attributes" : {
+      "flex" : "",
+      "enabled" : true,
+      "border_color" : "RGBA(0.000000,0.000000,0.000000,1.000000)",
+      "background_color" : "RGBA(1.000000,1.000000,1.000000,1.000000)",
+      "name" : "Add Person",
+      "tint_color" : "RGBA(0.000000,0.478000,1.000000,1.000000)"
+    }
+  }
+]

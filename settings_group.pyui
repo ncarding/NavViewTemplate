@@ -1,0 +1,84 @@
+[
+  {
+    "selected" : false,
+    "frame" : "{{0, 0}, {240, 240}}",
+    "class" : "View",
+    "nodes" : [
+      {
+        "selected" : false,
+        "frame" : "{{21, 116}, {80, 32}}",
+        "class" : "Button",
+        "nodes" : [
+
+        ],
+        "attributes" : {
+          "action" : "self.cancel_action",
+          "frame" : "{{80, 104}, {80, 32}}",
+          "title" : "Cancel",
+          "uuid" : "EDBFEC32-1415-4B8C-8E82-581FE176F70E",
+          "class" : "Button",
+          "name" : "cancel_button",
+          "font_size" : 15
+        }
+      },
+      {
+        "selected" : false,
+        "frame" : "{{141, 116}, {80, 32}}",
+        "class" : "Button",
+        "nodes" : [
+
+        ],
+        "attributes" : {
+          "action" : "self.settings_save_action",
+          "frame" : "{{80, 104}, {80, 32}}",
+          "title" : "Save",
+          "uuid" : "D6B4F904-58A8-43AB-92F7-AF949B247AE0",
+          "class" : "Button",
+          "name" : "save_button",
+          "font_size" : 15
+        }
+      },
+      {
+        "selected" : false,
+        "frame" : "{{21, 22}, {150, 32}}",
+        "class" : "Label",
+        "nodes" : [
+
+        ],
+        "attributes" : {
+          "font_size" : 18,
+          "frame" : "{{45, 104}, {150, 32}}",
+          "uuid" : "662A6319-F0EA-49BE-B090-844A9BE31AD8",
+          "text" : "Setting 1",
+          "alignment" : "left",
+          "class" : "Label",
+          "name" : "label1",
+          "font_name" : "<System>"
+        }
+      },
+      {
+        "selected" : true,
+        "frame" : "{{170, 23}, {51, 31}}",
+        "class" : "Switch",
+        "nodes" : [
+
+        ],
+        "attributes" : {
+          "frame" : "{{95, 105}, {51, 31}}",
+          "value" : true,
+          "class" : "Switch",
+          "name" : "setting_01_switch",
+          "uuid" : "96640E70-9EEF-46DD-AE35-07614CE83D00"
+        }
+      }
+    ],
+    "attributes" : {
+      "name" : "Settings",
+      "enabled" : true,
+      "tint_color" : "RGBA(0.000000,0.478000,1.000000,1.000000)",
+      "border_color" : "RGBA(0.000000,0.000000,0.000000,1.000000)",
+      "background_color" : "RGBA(1.000000,1.000000,1.000000,1.000000)",
+      "flex" : ""
+    }
+  }
+]

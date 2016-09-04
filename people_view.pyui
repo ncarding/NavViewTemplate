@@ -1,0 +1,38 @@
+[
+  {
+    "selected" : false,
+    "frame" : "{{0, 0}, {240, 240}}",
+    "class" : "View",
+    "nodes" : [
+      {
+        "selected" : true,
+        "frame" : "{{0, 0}, {240, 240}}",
+        "class" : "TableView",
+        "nodes" : [
+
+        ],
+        "attributes" : {
+          "flex" : "WH",
+          "data_source_items" : "",
+          "data_source_delete_enabled" : true,
+          "frame" : "{{20, 20}, {200, 200}}",
+          "uuid" : "C761BA95-5DDA-442C-9E56-DB31F5193AC0",
+          "data_source_number_of_lines" : 1,
+          "class" : "TableView",
+          "data_source_font_size" : 18,
+          "background_color" : "RGBA(1.0, 1.0, 1.0, 1.0)",
+          "name" : "tableview1",
+          "row_height" : 44
+        }
+      }
+    ],
+    "attributes" : {
+      "tint_color" : "RGBA(0.000000,0.478000,1.000000,1.000000)",
+      "enabled" : true,
+      "border_color" : "RGBA(0.000000,0.000000,0.000000,1.000000)",
+      "background_color" : "RGBA(1.000000,1.000000,1.000000,1.000000)",
+      "name" : "People",
+      "flex" : ""
+    }
+  }
+]
