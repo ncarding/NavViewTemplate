@@ -1,4 +1,8 @@
 # coding: utf-8
+"""
+This is a simple template for a Pythonista UI NavView app. It includes an object orientated module that enables you to collate, store, populate and manipulate whatever data you care to collect.
+"""
+# Code by Neil Carding https://github.com/ncarding/NavViewTemplate/
 # Initially based on code by the Tutorial Doctor 1/29/16
 
 import ui
@@ -161,7 +165,6 @@ class User_Interface():
 			'accessory_type': 'disclosure_indicator'})
 		# create a new Group object and add it to the group object list
 		self.groups_list.append(simple_module.Group(name))
-		print self.groups_list
 		self.save_file('ios_persistance.pkl', self.groups_list)
 		v.close()
 		
@@ -209,7 +212,6 @@ class User_Interface():
 		Executes when a list item is selected  in the Group list view.
 		"""
 		self.selected_group_row = sender.selected_row
-		print self.selected_group_row
 		self.root_view.navigation_view.push_view(self.people_pushed_view)
 		# add buttons to Nav View
 		add_person_btn = ui.ButtonItem('Add', None, self.people_btn_action)
