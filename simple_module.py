@@ -1,8 +1,8 @@
 class Group():
-	def __init__(self, name, people = []):
+	def __init__(self, name, people=None):
 		self.name = name
 		# people is a list of People objects
-		self.people = people
+		self.people = people or []  # Converts None into an empty list
 	
 	def get_name(self):
 		"""
