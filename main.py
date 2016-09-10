@@ -244,9 +244,7 @@ class User_Interface():
 		# THIS ONLY WORKS IF THE ITEM TITLES ARE UNIQUE.
 		# SET UP FOR GROUP LIST ONLY. ADAPT FOR ANY LIST
 		if len(sender.items) == len(self.groups_list) - 1:
-			item_titles = []
-			for item in sender.items:
-				item_titles.append(item['title'])
+			item_titles = [item['title'] for item in sender.items]
 			for group in self.groups_list:
 				if group.get_name() not in item_titles:
 					self.groups_list.remove(group)
@@ -267,9 +265,8 @@ class User_Interface():
 		local_people_list = selected_group.get_people()
 		
 		if len(sender.items) == len(local_people_list) - 1:
-			item_titles = []
-			for item in sender.items:
-				item_titles.append(item['title'])
+			item_titles = [item['title'] for item in sender.items]
+				item_titles.append()
 			for person in local_people_list:
 				persons_name = person.get_name()
 				if persons_name not in item_titles:
