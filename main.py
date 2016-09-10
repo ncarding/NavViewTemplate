@@ -5,12 +5,16 @@ This is a simple template for a Pythonista UI NavView app. It includes an object
 # Code by Neil Carding https://github.com/ncarding/NavViewTemplate/
 # Initially based on code by the Tutorial Doctor 1/29/16
 
-import ui
-import simple_module
-import cPickle as pickle
 import dialogs
 import os
+import ui
 
+try:                 # Python 2
+	import cPickle as pickle
+except ImportError:  # Python 3
+	import pickle
+
+import simple_module
 
 class User_Interface():
 	def __init__(self):
