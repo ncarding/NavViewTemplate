@@ -266,7 +266,6 @@ class User_Interface():
 		
 		if len(sender.items) == len(local_people_list) - 1:
 			item_titles = [item['title'] for item in sender.items]
-				item_titles.append()
 			for person in local_people_list:
 				persons_name = person.get_name()
 				if persons_name not in item_titles:
