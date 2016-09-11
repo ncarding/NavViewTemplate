@@ -1,6 +1,8 @@
 # coding: utf-8
 """
-This is a simple template for a Pythonista UI NavView app. It includes an object orientated module that enables you to collate, store, populate and manipulate whatever data you care to collect.
+This is a simple template for a Pythonista UI NavView app.
+It includes an object orientated module that enables you to collate, store,
+populate and manipulate whatever data you care to collect.
 """
 # Code by Neil Carding https://github.com/ncarding/NavViewTemplate/
 # Initially based on code by the Tutorial Doctor 1/29/16
@@ -9,12 +11,15 @@ import dialogs
 import os
 import ui
 
-try:                 # Python 2
+try:
+	# Python 2
 	import cPickle as pickle
-except ImportError:  # Python 3
+except ImportError:
+	# Python 3
 	import pickle
 
 import simple_module
+
 
 class User_Interface():
 	def __init__(self):
@@ -34,13 +39,13 @@ class User_Interface():
 		# THIS MUST BE CALLED BEFORE THE TABLE ITEMS ARE EXTRACTED!!
 		# File path is hard coded for iOS version).
 		# This creates a 'generator'.
-		saved_items = self.open_file('ios_persistance.pkl')
+		saved_items = self.read_file('ios_persistance.pkl')
 		# Iterate through saved_items generator and add the contents to the
 		# groups_list.
 		for item in saved_items:
 			self.groups_list.append(item)
 		# Do the same for Settings
-		# This is a slight duplicate of code but self.open_file didn't quite work.
+		# This is a slight duplicate of code but self.read_file didn't quite work.
 		if os.path.isfile('settings.pkl'):
 			with open('settings.pkl', 'rb') as output:
 				self.settings = pickle.load(output)
@@ -82,9 +87,9 @@ class User_Interface():
 		nav_view.present()
 
 	# FUNCTIONS
-	def open_file(self, filename):
+	def read_file(self, filename):
 		"""
-		Opens Pickle file and extracts all the objects into a list
+		Reads Pickle file and extracts all the objects into a list
 		"""
 		if os.path.isfile(filename):
 			with open(filename, "rb") as input:
@@ -93,6 +98,8 @@ class User_Interface():
 						yield pickle.load(input)
 					except EOFError:
 						break
+
+
 	
 	def save_file(self, filename, object_list):
 		"""
@@ -100,7 +107,7 @@ class User_Interface():
 		"""
 		with open(filename, 'wb') as output:
 			for object in object_list:
-				pickle.dump(object, output, pickle.HIGHEST_PROTOCOL)
+				pickle.dump(object, output, protocol=2)
 	
 	def connect(self, sender, title, view_name):
 		"""
@@ -163,14 +170,18 @@ class User_Interface():
 		# check name is unique. This is essential because of the way i have
 		# had to implement the deleting of a list item from the object list.
 		self.unique_name(name, 'group')
-		# Add item to the listsource
-		self.groups_listsource.items.append({
-			'title': name,
-			'accessory_type': 'disclosure_indicator'})
-		# create a new Group object and add it to the group object list
-		self.groups_list.append(simple_module.Group(name))
-		self.save_file('ios_persistance.pkl', self.groups_list)
-		v.close()
+		# check name_textfield contains a value
+		if name:
+			# Add item to the listsource
+			self.groups_listsource.items.append({
+				'title': name,
+				'accessory_type': 'disclosure_indicator'})
+			# create a new Group object and add it to the group object list
+			self.groups_list.append(simple_module.Group(name))
+			self.save_file('ios_persistance.pkl', self.groups_list)
+			v.close()
+		else:
+			v.close()
 		
 	def people_save_action(self, sender):
 		"""
@@ -183,14 +194,18 @@ class User_Interface():
 		# Check name is unique. This is essential because of the way I have
 		# had to implement the deleting of a list item from the object list.
 		self.unique_name(name, 'people')
-		# Add item to the listsource
-		self.people_listsource.items.append({'title': name})
-		# Create a new Person object and add it to the people list
-		# of the selected group
-		new_person = simple_module.Person(name)
-		self.groups_list[self.selected_group_row].add_person(new_person)
-		self.save_file('ios_persistance.pkl', self.groups_list)
-		v.close()
+		# check name_textfield contains a value
+		if name:
+			# Add item to the listsource
+			self.people_listsource.items.append({'title': name})
+			# Create a new Person object and add it to the people list
+			# of the selected group
+			new_person = simple_module.Person(name)
+			self.groups_list[self.selected_group_row].add_person(new_person)
+			self.save_file('ios_persistance.pkl', self.groups_list)
+			v.close()
+		else:
+			v.close
 		
 	def settings_save_action(self, sender):
 		"""
@@ -201,7 +216,7 @@ class User_Interface():
 		# replace setting's dict
 		self.settings = {'setting_01': setting_01}
 		with open('settings.pkl', 'wb') as output:
-			pickle.dump(self.settings, output, pickle.HIGHEST_PROTOCOL)
+			pickle.dump(self.settings, output, protocol=2)
 		v.close()
 	
 	def cancel_action(self, sender):
