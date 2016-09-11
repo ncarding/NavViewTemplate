@@ -98,8 +98,6 @@ class User_Interface():
 						yield pickle.load(input)
 					except EOFError:
 						break
-
-
 	
 	def save_file(self, filename, object_list):
 		"""
@@ -107,7 +105,7 @@ class User_Interface():
 		"""
 		with open(filename, 'wb') as output:
 			for object in object_list:
-				pickle.dump(object, output, protocol=2)
+				pickle.dump(object, output, pickle.HIGHEST_PROTOCOL)
 	
 	def connect(self, sender, title, view_name):
 		"""
@@ -216,7 +214,7 @@ class User_Interface():
 		# replace setting's dict
 		self.settings = {'setting_01': setting_01}
 		with open('settings.pkl', 'wb') as output:
-			pickle.dump(self.settings, output, protocol=2)
+			pickle.dump(self.settings, output, pickle.HIGHEST_PROTOCOL)
 		v.close()
 	
 	def cancel_action(self, sender):
