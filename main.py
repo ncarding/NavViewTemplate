@@ -163,8 +163,8 @@ class User_Interface():
 		simple_module Group object.
 		Also saves the Group list to a pickle file.
 		"""
-		v = sender.superview
-		name = v['name_textfield'].text
+		view = sender.superview
+		name = view['name_textfield'].text
 		# check name is unique. This is essential because of the way i have
 		# had to implement the deleting of a list item from the object list.
 		self.unique_name(name, 'group')
@@ -177,9 +177,9 @@ class User_Interface():
 			# create a new Group object and add it to the group object list
 			self.groups_list.append(simple_module.Group(name))
 			self.save_file('ios_persistance.pkl', self.groups_list)
-			v.close()
+			view.close()
 		else:
-			v.close()
+			dialogs.alert('Please enter a unique name')
 		
 	def people_save_action(self, sender):
 		"""
@@ -187,8 +187,8 @@ class User_Interface():
 		simple_module Person object.
 		Also saves the Group list to a pickle file.
 		"""
-		v = sender.superview
-		name = v['name_textfield'].text
+		view = sender.superview
+		name = view['name_textfield'].text
 		# Check name is unique. This is essential because of the way I have
 		# had to implement the deleting of a list item from the object list.
 		self.unique_name(name, 'people')
@@ -201,28 +201,28 @@ class User_Interface():
 			new_person = simple_module.Person(name)
 			self.groups_list[self.selected_group_row].add_person(new_person)
 			self.save_file('ios_persistance.pkl', self.groups_list)
-			v.close()
+			view.close()
 		else:
-			v.close
+			dialogs.alert('Please enter a unique name')
 		
 	def settings_save_action(self, sender):
 		"""
 		Saves the usees Settings preferences to a pickle file.
 		"""
-		v = sender.superview
-		setting_01 = v['setting_01_switch'].value
+		view = sender.superview
+		setting_01 = view['setting_01_switch'].value
 		# replace setting's dict
 		self.settings = {'setting_01': setting_01}
 		with open('settings.pkl', 'wb') as output:
 			pickle.dump(self.settings, output, pickle.HIGHEST_PROTOCOL)
-		v.close()
+		view.close()
 	
 	def cancel_action(self, sender):
 		"""
 		Closes the current view.
 		"""
-		v = sender.superview
-		v.close()
+		view = sender.superview
+		view.close()
 		
 	def group_list_action(self, sender):
 		"""
