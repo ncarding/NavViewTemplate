@@ -1,14 +1,29 @@
 class Group():
-	def __init__(self, name, people=None):
+	def __init__(self, name, data1=None, data2=None, people=None):
 		self.name = name
+		self.data1 = data1
+		self.data2 = data2
 		# people is a list of People objects
-		self.people = people or []  # Converts None into an empty list
+		# [] convert None into an empty list
+		self.people = people or []
 	
 	def get_name(self):
 		"""
 		Returns name as a string
 		"""
 		return self.name
+		
+	def get_data1(self):
+		"""
+		Returns data1
+		"""
+		return self.data1
+		
+	def get_data2(self):
+		"""
+		Returns data2
+		"""
+		return self.data2
 		
 	def get_people(self):
 		"""
@@ -35,11 +50,25 @@ class Group():
 		
 		
 class Person():
-	def __init__(self, name):
+	def __init__(self, name, data1=None, data2=None):
 		self.name = name
+		self.data1 = data1
+		self.data2 = data2
 		
 	def get_name(self):
 		"""
 		Returns person's name as string
 		"""
 		return self.name
+		
+	def get_data1(self):
+		"""
+		Returns data1
+		"""
+		return self.data1
+		
+	def get_data2(self):
+		"""
+		Returns data2
+		"""
+		return self.data2
