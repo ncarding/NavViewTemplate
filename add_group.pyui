@@ -1,7 +1,7 @@
 [
   {
     "selected" : false,
-    "frame" : "{{0, 0}, {240, 240}}",
+    "frame" : "{{0, 0}, {240, 320}}",
     "class" : "View",
     "nodes" : [
       {
@@ -12,14 +12,14 @@
 
         ],
         "attributes" : {
-          "font_size" : 18,
+          "font_name" : "<System>",
           "frame" : "{{45, 104}, {150, 32}}",
           "class" : "Label",
           "text" : "Name",
           "alignment" : "left",
           "uuid" : "69F99911-3F3A-444F-AE85-FE9E9AFB2947",
-          "name" : "label1",
-          "font_name" : "<System>"
+          "font_size" : 18,
+          "name" : "name_label"
         }
       },
       {
@@ -30,20 +30,20 @@
 
         ],
         "attributes" : {
-          "font_size" : 17,
+          "font_name" : "<System>",
           "frame" : "{{20, 104}, {200, 32}}",
           "spellchecking_type" : "default",
           "class" : "TextField",
           "uuid" : "D5A3A9C0-16D1-4D27-B9C3-32A9A2DB05B8",
           "alignment" : "left",
           "autocorrection_type" : "default",
-          "name" : "name_textfield",
-          "font_name" : "<System>"
+          "font_size" : 17,
+          "name" : "name_textfield"
         }
       },
       {
         "selected" : false,
-        "frame" : "{{21, 193}, {80, 32}}",
+        "frame" : "{{21, 267}, {80, 32}}",
         "class" : "Button",
         "nodes" : [
 
@@ -59,8 +59,8 @@
         }
       },
       {
-        "selected" : true,
-        "frame" : "{{141, 193}, {80, 32}}",
+        "selected" : false,
+        "frame" : "{{141, 267}, {80, 32}}",
         "class" : "Button",
         "nodes" : [
 
@@ -74,15 +74,89 @@
           "font_size" : 15,
           "name" : "save_button"
         }
+      },
+      {
+        "selected" : false,
+        "frame" : "{{21, 99}, {150, 32}}",
+        "class" : "Label",
+        "nodes" : [
+
+        ],
+        "attributes" : {
+          "font_name" : "<System>",
+          "frame" : "{{45, 104}, {150, 32}}",
+          "class" : "Label",
+          "text" : "Data 1",
+          "alignment" : "left",
+          "uuid" : "69F99911-3F3A-444F-AE85-FE9E9AFB2947",
+          "name" : "data1_label",
+          "font_size" : 18
+        }
+      },
+      {
+        "selected" : false,
+        "frame" : "{{21, 139}, {200, 32}}",
+        "class" : "TextField",
+        "nodes" : [
+
+        ],
+        "attributes" : {
+          "font_name" : "<System>",
+          "frame" : "{{20, 104}, {200, 32}}",
+          "spellchecking_type" : "default",
+          "class" : "TextField",
+          "uuid" : "D5A3A9C0-16D1-4D27-B9C3-32A9A2DB05B8",
+          "alignment" : "left",
+          "autocorrection_type" : "default",
+          "name" : "data1_textfield",
+          "font_size" : 17
+        }
+      },
+      {
+        "selected" : false,
+        "frame" : "{{21, 219}, {200, 32}}",
+        "class" : "TextField",
+        "nodes" : [
+
+        ],
+        "attributes" : {
+          "font_name" : "<System>",
+          "frame" : "{{20, 104}, {200, 32}}",
+          "spellchecking_type" : "default",
+          "class" : "TextField",
+          "uuid" : "D5A3A9C0-16D1-4D27-B9C3-32A9A2DB05B8",
+          "alignment" : "left",
+          "autocorrection_type" : "default",
+          "name" : "data2_textfield",
+          "font_size" : 17
+        }
+      },
+      {
+        "selected" : false,
+        "frame" : "{{21, 179}, {150, 32}}",
+        "class" : "Label",
+        "nodes" : [
+
+        ],
+        "attributes" : {
+          "font_name" : "<System>",
+          "frame" : "{{45, 104}, {150, 32}}",
+          "class" : "Label",
+          "text" : "Data 2",
+          "alignment" : "left",
+          "uuid" : "69F99911-3F3A-444F-AE85-FE9E9AFB2947",
+          "font_size" : 18,
+          "name" : "data2_label"
+        }
       }
     ],
     "attributes" : {
-      "flex" : "",
+      "name" : "Group",
       "enabled" : true,
-      "tint_color" : "RGBA(0.000000,0.478000,1.000000,1.000000)",
-      "name" : "Add Group",
       "border_color" : "RGBA(0.000000,0.000000,0.000000,1.000000)",
-      "background_color" : "RGBA(1.000000,1.000000,1.000000,1.000000)"
+      "background_color" : "RGBA(1.000000,1.000000,1.000000,1.000000)",
+      "tint_color" : "RGBA(0.000000,0.478000,1.000000,1.000000)",
+      "flex" : ""
     }
   }
 ]
