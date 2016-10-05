@@ -5,21 +5,21 @@
     "class" : "View",
     "nodes" : [
       {
-        "selected" : true,
+        "selected" : false,
         "frame" : "{{21, 19}, {150, 32}}",
         "class" : "Label",
         "nodes" : [
 
         ],
         "attributes" : {
-          "name" : "name_label",
+          "font_name" : "<System>",
           "frame" : "{{45, 104}, {150, 32}}",
           "uuid" : "69F99911-3F3A-444F-AE85-FE9E9AFB2947",
           "text" : "Name",
           "alignment" : "left",
           "class" : "Label",
-          "font_size" : 18,
-          "font_name" : "<System>"
+          "name" : "name_label",
+          "font_size" : 18
         }
       },
       {
@@ -30,15 +30,15 @@
 
         ],
         "attributes" : {
-          "name" : "name_textfield",
+          "font_name" : "<System>",
           "frame" : "{{20, 104}, {200, 32}}",
           "spellchecking_type" : "default",
           "class" : "TextField",
           "uuid" : "D5A3A9C0-16D1-4D27-B9C3-32A9A2DB05B8",
           "alignment" : "left",
           "autocorrection_type" : "default",
-          "font_size" : 17,
-          "font_name" : "<System>"
+          "name" : "name_textfield",
+          "font_size" : 17
         }
       },
       {
@@ -59,14 +59,14 @@
         }
       },
       {
-        "selected" : false,
+        "selected" : true,
         "frame" : "{{141, 266}, {80, 32}}",
         "class" : "Button",
         "nodes" : [
 
         ],
         "attributes" : {
-          "action" : "self.people_save_action",
+          "action" : "self.person_save_action",
           "frame" : "{{80, 104}, {80, 32}}",
           "title" : "Save",
           "uuid" : "D6B4F904-58A8-43AB-92F7-AF949B247AE0",
@@ -83,14 +83,14 @@
 
         ],
         "attributes" : {
-          "font_size" : 18,
+          "font_name" : "<System>",
           "frame" : "{{45, 104}, {150, 32}}",
           "uuid" : "69F99911-3F3A-444F-AE85-FE9E9AFB2947",
           "text" : "Data 1",
           "alignment" : "left",
           "class" : "Label",
-          "name" : "data1_label",
-          "font_name" : "<System>"
+          "font_size" : 18,
+          "name" : "data1_label"
         }
       },
       {
@@ -101,14 +101,14 @@
 
         ],
         "attributes" : {
-          "font_size" : 18,
+          "font_name" : "<System>",
           "frame" : "{{45, 104}, {150, 32}}",
           "uuid" : "69F99911-3F3A-444F-AE85-FE9E9AFB2947",
           "text" : "Data 2",
           "alignment" : "left",
           "class" : "Label",
-          "name" : "data2_label",
-          "font_name" : "<System>"
+          "font_size" : 18,
+          "name" : "data2_label"
         }
       },
       {
@@ -119,15 +119,15 @@
 
         ],
         "attributes" : {
-          "font_size" : 17,
+          "font_name" : "<System>",
           "frame" : "{{20, 104}, {200, 32}}",
           "spellchecking_type" : "default",
           "class" : "TextField",
           "uuid" : "D5A3A9C0-16D1-4D27-B9C3-32A9A2DB05B8",
           "alignment" : "left",
           "autocorrection_type" : "default",
-          "name" : "data1_textfield",
-          "font_name" : "<System>"
+          "font_size" : 17,
+          "name" : "data1_textfield"
         }
       },
       {
@@ -138,25 +138,25 @@
 
         ],
         "attributes" : {
-          "font_size" : 17,
+          "font_name" : "<System>",
           "frame" : "{{20, 104}, {200, 32}}",
           "spellchecking_type" : "default",
           "class" : "TextField",
           "uuid" : "D5A3A9C0-16D1-4D27-B9C3-32A9A2DB05B8",
           "alignment" : "left",
           "autocorrection_type" : "default",
-          "name" : "data2_textfield",
-          "font_name" : "<System>"
+          "font_size" : 17,
+          "name" : "data2_textfield"
         }
       }
     ],
     "attributes" : {
-      "name" : "Person",
+      "flex" : "",
       "enabled" : true,
       "tint_color" : "RGBA(0.000000,0.478000,1.000000,1.000000)",
+      "name" : "Person",
       "border_color" : "RGBA(0.000000,0.000000,0.000000,1.000000)",
-      "background_color" : "RGBA(1.000000,1.000000,1.000000,1.000000)",
-      "flex" : ""
+      "background_color" : "RGBA(1.000000,1.000000,1.000000,1.000000)"
     }
   }
 ]
