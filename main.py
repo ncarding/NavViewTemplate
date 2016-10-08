@@ -25,6 +25,7 @@ class User_Interface():
 	def __init__(self):
 		self.groups_list = []
 		self.selected_group_row = -1
+		self.selected_accessory_row = -1
 		self.settings = {'setting_01': True}
 		self.setup()
 	
@@ -63,12 +64,13 @@ class User_Interface():
 			group_name = group.get_name()
 			table_items.append({
 				'title': group_name,
-				'accessory_type': 'disclosure_indicator'})
+				'accessory_type': 'detail_disclosure_button'})
 		self.groups_listsource = ui.ListDataSource(table_items)
 		self.root_table.data_source = self.groups_listsource
 		self.root_table.delegate = self.groups_listsource
 		self.groups_listsource.action = self.group_list_action
 		self.groups_listsource.edit_action = self.groups_edit_action
+		self.groups_listsource.accessory_action = self.group_accessory_action
 		self.root_view.add_subview(self.root_table)
 		
 		# SETUP PEOPLE VIEW
@@ -107,7 +109,7 @@ class User_Interface():
 			for object in object_list:
 				pickle.dump(object, output, pickle.HIGHEST_PROTOCOL)
 	
-	def connect(self, sender, title, view_name):
+	def connect_btns(self, sender, title, view_name):
 		"""
 		Connects ui buttons in xxx_btn_action methods to the relevant view.
 		"""
@@ -118,20 +120,79 @@ class User_Interface():
 				# Default values for Settings View.
 				self.settings_values(view)
 			view.present()
+			
+	def selected_group_obj(self, index):
+		"""
+		Returns the Group object for the currently selected group.
+		"""
+		return self.groups_list[index]
+		
+	def selected_person_obj(self):
+		"""
+		Returns the person object for the currently selected person.
+		"""
+		people = self.selected_group_obj(self.selected_group_row).get_people()
+		return people[self.selected_accessory_row]
 	
 	def groups_btn_action(self, sender):
 		"""
 		Called when a button in the Group view is selected.
 		"""
-		self.connect(sender, 'Settings', 'settings_group')
-		self.connect(sender, 'Add', 'add_group')
+		self.connect_btns(sender, 'Settings', 'settings_group')
+		self.connect_btns(sender, 'Add', 'group')
 		
 	def people_btn_action(self, sender):
 		"""
 		Called when a button in the People view is selected.
 		"""
-		self.connect(sender, 'Add', 'add_person')
+		self.connect_btns(sender, 'Add', 'person')
+
+	def set_group_values(self, view, index):
+		"""
+		Populates the fields in the Group form ui ready for editing.
+		"""
+		group = self.selected_group_obj(index)
+		name = group.get_name()
+		data1 = group.get_data1()
+		data2 = group.get_data2()
+		view['name_textfield'].text = name
+		if data1:
+			view['data1_textfield'].text = data1
+		if data2:
+			view['data2_textfield'].text = data2
 		
+	def set_person_values(self, view):
+		"""
+		Populates the fields in the person form ui ready for editing.
+		"""
+		person = self.selected_person_obj()
+		name = person.get_name()
+		data1 = person.get_data1()
+		data2 = person.get_data2()
+		view['name_textfield'].text = name
+		if data1:
+			view['data1_textfield'].text = data1
+		if data2:
+			view['data2_textfield'].text = data2
+	
+	def get_group_values(self, view):
+		"""
+		Extracts values from the Group form fields and returns them as a tuple.
+		"""
+		name = view['name_textfield'].text
+		data1 = view['data1_textfield'].text
+		data2 = view['data2_textfield'].text
+		return name, data1, data2
+		
+	def get_person_values(self, view):
+		"""
+		Extracts values from the person form fields and returns them as a tuple.
+		"""
+		name = view['name_textfield'].text
+		data1 = view['data1_textfield'].text
+		data2 = view['data2_textfield'].text
+		return name, data1, data2
+
 	def settings_values(self, view):
 		"""
 		Populates the form fields in the Settings view with their current values.
@@ -157,52 +218,68 @@ class User_Interface():
 			if name == object.get_name():
 				dialogs.alert('Please use a unique name')
 		
-	def group_save_action(self, sender):
+	def group_save_action(self, sender, update=False):
 		"""
 		Adds a new group to the listsource and creates a new
 		simple_module Group object.
 		Also saves the Group list to a pickle file.
 		"""
 		view = sender.superview
-		name = view['name_textfield'].text
+		name, data1, data2 = self.get_group_values(view)
 		# check name is unique. This is essential because of the way i have
 		# had to implement the deleting of a list item from the object list.
 		self.unique_name(name, 'group')
 		# check name_textfield contains a value
 		if name:
-			# Add item to the listsource
-			self.groups_listsource.items.append({
-				'title': name,
-				'accessory_type': 'disclosure_indicator'})
-			# create a new Group object and add it to the group object list
-			self.groups_list.append(simple_module.Group(name))
+			# Create a new Group object
+			new_group = simple_module.Group(name, data1, data2)
+			# Check to see if this is a new person or an updated group
+			if update is True:
+				# If it's updated replace existing group with new one.
+				self.groups_list[self.selected_accessory_row] = new_group
+			else:
+				# Add item to the listsource
+				self.groups_listsource.items.append({
+					'title': name,
+					'accessory_type': 'detail_disclosure_button'})
+				# create a new Group object and add it to the group object list
+				self.groups_list.append(
+					simple_module.Group(name, data1, data2)
+					)
 			self.save_file('ios_persistance.pkl', self.groups_list)
 			view.close()
 		else:
 			dialogs.alert('Please enter a unique name')
-		
-	def people_save_action(self, sender):
+			
+	def person_save_action(self, sender, update=False):
 		"""
-		Adds a new person to the listsource and creates a new
-		simple_module Person object.
+		Adds a new person to the listsource and creates a new MS Person object.
 		Also saves the Group list to a pickle file.
 		"""
 		view = sender.superview
-		name = view['name_textfield'].text
+		name, data1, data2 = self.get_person_values(view)
 		# Check name is unique. This is essential because of the way I have
 		# had to implement the deleting of a list item from the object list.
 		self.unique_name(name, 'people')
 		# check name_textfield contains a value
 		if name:
-			# Add item to the listsource
-			self.people_listsource.items.append({'title': name})
 			# Create a new Person object and add it to the people list
 			# of the selected group
-			new_person = simple_module.Person(name)
-			self.groups_list[self.selected_group_row].add_person(new_person)
+			new_person = simple_module.Person(name, data1, data2)
+			# Check to see if this is a new person or an updated person
+			if update is True:
+				self.selected_group_obj(self.selected_group_row).replace_person(
+					self.selected_accessory_row, new_person)
+			else:
+				# Add item to the listsource
+				self.people_listsource.items.append({
+					'title': name,
+					'accessory_type': 'detail_button'})
+				self.selected_group_obj(self.selected_group_row).add_person(new_person)
 			self.save_file('ios_persistance.pkl', self.groups_list)
 			view.close()
 		else:
+			# If name field has been left blank open dialog box.
 			dialogs.alert('Please enter a unique name')
 		
 	def settings_save_action(self, sender):
@@ -216,6 +293,60 @@ class User_Interface():
 		with open('settings.pkl', 'wb') as output:
 			pickle.dump(self.settings, output, pickle.HIGHEST_PROTOCOL)
 		view.close()
+		
+	def group_update_action(self, sender):
+		"""
+		Called when Group view is saved after editing.
+		"""
+		view = sender.superview
+		group = self.selected_group_obj(self.selected_group_row)
+		original_name = group.get_name()
+		# Set variables for each field in the group form
+		name, data1, data2 = self.get_group_values(view)
+		# If it hadn't changed we can skip checking if it exists or is
+		# unique, which is done in person_save_action()
+		if name == original_name:
+			
+			# Create a new Group object and replace the old one.
+			# Need to include existing People list.
+			people_list = group.get_people()
+			new_group = simple_module.Group(name, data1, data2, people_list)
+			self.groups_list[self.selected_accessory_row] = new_group
+			self.save_file('ios_persistance.pkl', self.groups_list)
+			view.close()
+		else:
+			# If the name has changed update the groups_listsource
+			# and let person_save_action() do the rest.
+			self.groups_listsource.items[self.selected_accessory_row]['title'] = name
+			self.groups_listsource.reload()
+			self.group_save_action(sender, update=True)
+	
+	def person_update_action(self, sender):
+		"""
+		Called when 'person' view is saved after editing.
+		"""
+		view = sender.superview
+		person = self.selected_person_obj()
+		original_name = person.get_name()
+		# Set variables for each field in the person form
+		name, data1, data2 = self.get_person_values(view)
+		# If it hadn't changed we can skip checking if it exists or is
+		# unique, which is done in person_save_action()
+		if name == original_name:
+			
+			# Create a new Person object and replace the old one with it
+			# for the selected group.
+			new_person = simple_module.Person(name, data1, data2)
+			self.selected_group_obj(self.selected_group_row).replace_person(
+				self.selected_accessory_row, new_person)
+			self.save_file('ios_persistance.pkl', self.groups_list)
+			view.close()
+		else:
+			# If the name has changed update the people_listsource
+			# and let person_save_action() do the rest.
+			self.people_listsource.items[self.selected_accessory_row]['title'] = name
+			self.people_listsource.reload()
+			self.person_save_action(sender, update=True)
 	
 	def cancel_action(self, sender):
 		"""
@@ -238,12 +369,15 @@ class User_Interface():
 		people_items = []
 		for person in people_list:
 			name = person.get_name()
-			people_items.append({'title': name})
+			people_items.append({
+					'title': name,
+					'accessory_type': 'detail_button'})
 		# You can use a list or a class as the data source for the tableview
 		self.people_listsource = ui.ListDataSource(people_items)
 		self.people_table.data_source = self.people_listsource
 		self.people_table.delegate = self.people_listsource
 		self.people_listsource.edit_action = self.people_edit_action
+		self.people_listsource.accessory_action = self.people_accessory_action
 		self.people_table.reload()
 	
 	def groups_edit_action(self, sender):
@@ -284,6 +418,36 @@ class User_Interface():
 				if persons_name not in item_titles:
 					selected_group.delete_person_by_name(persons_name)
 		self.save_file('ios_persistance.pkl', self.groups_list)
+		
+	def group_accessory_action(self, sender):
+		"""
+		Called when an info button is tapped in one of the group list cells.
+		Sender is the ListDataSource object.
+		"""
+		# Define selected_accessory_row for later use.
+		self.selected_accessory_row = sender.tapped_accessory_row
+		# Open the 'person' ui view
+		view = ui.load_view('group')
+		# Populate view data fields
+		self.set_group_values(view, self.selected_accessory_row)
+		# Override the save button action. Default is self.person_save_action
+		view['save_button'].action = self.group_update_action
+		view.present()
+	
+	def people_accessory_action(self, sender):
+		"""
+		Called when an info button is tapped in one of the people list cells.
+		Sender is the ListDataSource object.
+		"""
+		# Define selected_accessory_row for later use.
+		self.selected_accessory_row = sender.tapped_accessory_row
+		# Open the 'person' ui view
+		view = ui.load_view('person')
+		# Populate view data fields
+		self.set_person_values(view)
+		# Override the save button action. Default is self.person_save_action
+		view['save_button'].action = self.person_update_action
+		view.present()
 	
 
 User_Interface()

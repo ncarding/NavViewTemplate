@@ -47,6 +47,13 @@ class Group():
 			if person.get_name() == name:
 				self.people.remove(person)
 				break
+				
+	def replace_person(self, position_in_list, updated_person):
+		"""
+		This replaces a person object with a new one,
+		in the same position within the people list.
+		"""
+		self.people[position_in_list] = updated_person
 		
 		
 class Person():
